@@ -8,7 +8,7 @@ interface RegionData {
 
 interface RegionChartProps {
   data: RegionData[];
-  title: string;
+  title?: string;
   region?: string;
 }
 
@@ -53,9 +53,16 @@ export const RegionChart: React.FC<RegionChartProps> = ({ data, title, region = 
   };
 
   return (
-    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 h-full">
-      <h3 className="text-white text-lg font-semibold mb-4">{title}</h3>
-      <div className="h-96">
+    <div className="h-full">
+      {title && <h3 className="text-white text-lg font-semibold mb-4">{title}</h3>}
+      <div
+        className="flex items-center justify-center"
+        style={{
+          borderRadius: '50%',
+          overflow: 'hidden',
+          background: 'transparent'
+        }}
+      >
         <Chart
           chartType="GeoChart"
           width="100%"

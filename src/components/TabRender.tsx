@@ -22,6 +22,7 @@ const TabRender: React.FC<TabRenderProps> = ({ tabs }) => {
                         style={{
                             padding: '8px 16px',
                             border: 'none',
+                            color: activeIndex === idx ? '#007bff' : '#000',
                             borderBottom: activeIndex === idx ? '2px solid #007bff' : 'none',
                             background: 'none',
                             cursor: 'pointer',
