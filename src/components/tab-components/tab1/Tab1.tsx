@@ -1,5 +1,5 @@
 import { StatCard } from './StatCard';
-import { GeographicChart } from './GeographicChart';
+import { GeographicChart } from '../GeographicChart';
 import { RegionChart } from './RegionChart';
 import { GoogleBarChart } from './GoogleBarChart';
 import { GooglePieChart } from './GooglePieChart';
