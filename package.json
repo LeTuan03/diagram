@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@amcharts/amcharts4-geodata": "^4.1.30",
+    "@amcharts/amcharts5": "^5.13.3",
+    "@amcharts/amcharts5-geodata": "^5.1.4",
     "ag-charts-enterprise": "^12.0.0",
     "ag-charts-react": "^12.0.0",
     "clsx": "^2.1.1",

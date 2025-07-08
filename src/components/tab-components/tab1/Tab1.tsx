@@ -53,18 +53,21 @@ function Tap1() {
         { country: 'Brazil', value: 350 },
         { country: 'Canada', value: 300 },
         { country: 'Australia', value: 250 },
+        { country: 'Vietnam', value: 200 },
     ];
 
     // Regional data for Asia
     const asiaData = [
-        { region: 'CN-BJ', value: 200 }, // Beijing
-        { region: 'CN-SH', value: 180 }, // Shanghai
-        { region: 'CN-GD', value: 160 }, // Guangdong
-        { region: 'CN-JS', value: 140 }, // Jiangsu
-        { region: 'CN-ZJ', value: 120 }, // Zhejiang
-        { region: 'CN-SD', value: 100 }, // Shandong
-        { region: 'CN-HB', value: 90 },  // Hubei
-        { region: 'CN-SC', value: 85 },  // Sichuan
+        { region: 'VN-HN', value: 200 }, // Hà Nội
+        { region: 'VN-HCM', value: 180 }, // Hồ Chí Minh
+        { region: 'VN-DN', value: 160 }, // Đà Nẵng
+        { region: 'VN-HP', value: 140 }, // Hải Phòng
+        { region: 'VN-CT', value: 120 }, // Cần Thơ
+        { region: 'VN-KH', value: 100 }, // Khánh Hòa
+        { region: 'VN-BD', value: 90 },  // Bình Dương
+        { region: 'VN-DNai', value: 85 },  // Đồng Nai
+        { region: 'VN-QN', value: 70 },  // Quảng Ninh
+        { region: 'VN-TTH', value: 65 },  // Thừa Thiên Huế
     ];
 
     return (
