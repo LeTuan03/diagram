@@ -3,6 +3,7 @@ import {
   ComposableMap,
   Geographies,
   Geography,
+  Marker,
   ZoomableGroup,
 } from "react-simple-maps";
 import dataFake from "./geoData/dataFake.json";
@@ -20,8 +21,22 @@ const COLORS = [
   "#6C63FF", "#00B894", "#0984E3", "#FD7272", "#FDCB6E", "#00CEC9", "#D35400"
 ];
 
+const markers = [
+  {
+    name: "Bệnh viện A",
+    coordinates: [106.93732619000005, 11.355454453000069],
+    description: "Bệnh viện A phục vụ khu vực phía Đông."
+  },
+  {
+    name: "Cửa hàng B",
+    coordinates: [106.700981, 10.776530],
+    description: "Cửa hàng B nổi tiếng với các sản phẩm địa phương."
+  }
+];
+
+
 const Tab5: React.FC = () => {
-  const [zoomLevel, setZoomLevel] = useState(1);
+  const [zoomLevel, setZoomLevel] = useState(2);
   const [selectedProvince, setSelectedProvince] = useState<{
     name: string;
     coordinates: Position;
@@ -39,7 +54,7 @@ const Tab5: React.FC = () => {
   }, []);
 
   const displayGeoJSON = useMemo(() => {
-    return zoomLevel > 1 ? phuongXaGeojson : tinhGeojson;
+    return zoomLevel > 2 ? phuongXaGeojson : tinhGeojson;
   }, [zoomLevel]);
 
   // Tính center cho map
@@ -104,23 +119,27 @@ const Tab5: React.FC = () => {
   // Handle tooltip position for province
   useEffect(() => {
     if (!selectedProvince) return setTooltipPos(null);
-    const svg = document.querySelector("svg");
-    if (!svg) return;
-    const pt = svg.createSVGPoint();
-    pt.x = selectedProvince.coordinates[0];
-    pt.y = selectedProvince.coordinates[1];
-    // Not using pt.matrixTransform here, so fallback to center
-    setTooltipPos({ x: 400, y: 120 });
+    // Lấy vị trí chuột cuối cùng khi click vào province
+    const handleClick = (e: MouseEvent) => {
+      setTooltipPos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("click", handleClick, { once: true });
+    return () => window.removeEventListener("click", handleClick);
   }, [selectedProvince]);
 
   // Handle tooltip position for point
   useEffect(() => {
     if (!selectedPoint) return setTooltipPos(null);
-    setTooltipPos({ x: 400, y: 180 });
+    // Lấy vị trí chuột cuối cùng khi click vào point
+    const handleClick = (e: MouseEvent) => {
+      setTooltipPos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("click", handleClick, { once: true });
+    return () => window.removeEventListener("click", handleClick);
   }, [selectedPoint]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-2 font-sans relative">
+    <div className="from-slate-900 via-slate-800 to-slate-900 p-2 font-sans relative h-full">
       <div className="flex items-center justify-center h-full w-full">
         <ComposableMap
           projection="geoMercator"
@@ -140,7 +159,7 @@ const Tab5: React.FC = () => {
             }}
             minZoom={1}
             maxZoom={10}
-            // transitionDuration={350}
+          // transitionDuration={350}
           >
             <Geographies geography={displayGeoJSON}>
               {({ geographies, projection }) => (
@@ -153,8 +172,6 @@ const Tab5: React.FC = () => {
                         key={geo.rsmKey}
                         geography={geo}
                         onClick={() => {
-                          console.log(geo);
-
                           setSelectedProvince({
                             name:
                               geo.properties?.Ten ||
@@ -164,8 +181,8 @@ const Tab5: React.FC = () => {
                             population: geo.properties?.DanSo || "Không rõ",
                           });
                         }}
-                        onMouseEnter={() => setHoveredGeo(geo.rsmKey)}
-                        onMouseLeave={() => setHoveredGeo(null)}
+                        // onMouseEnter={() => setHoveredGeo(geo.rsmKey)}
+                        // onMouseLeave={() => setHoveredGeo(null)}
                         style={{
                           default: {
                             fill: getAreaColor(idx),
@@ -332,6 +349,68 @@ const Tab5: React.FC = () => {
                 </>
               )}
             </Geographies>
+
+            {/* Hiển thị marker cho từng địa điểm từ geojson */}
+            {markers.map(({ name, coordinates, description }, idx) => (
+              <Marker key={name + idx} coordinates={coordinates}>
+                <g transform="translate(-5, -10)" className="modern-marker">
+                  <circle cx="6" cy="5" r="2" fill="#FF5533" opacity={0.85} />
+                  <circle className="pulse-circle" cx="6" cy="5" r="2" />
+                  <path
+                    d="M6 11C8.7 9 10 7 10 5a4 4 0 1 0-8 0c0 2 1.3 4 4 6z"
+                    fill="#FF5533"
+                    stroke="white"
+                    strokeWidth="0.6"
+                    opacity={0.95}
+                  />
+                </g>
+
+                <g transform="translate(0, -20)">
+                  <rect
+                    x={-30}
+                    y={-10}
+                    width={60}
+                    height={20}
+                    rx={5}
+                    ry={5}
+                    fill="rgba(255, 255, 255, 0.85)"
+                    stroke="#ddd"
+                    strokeWidth={0.6}
+                    filter="url(#shadow)"
+                  />
+                  <text
+                    x={0}
+                    y={-1}
+                    textAnchor="middle"
+                    style={{
+                      fontFamily: "Inter, system-ui",
+                      fill: "#111",
+                      fontWeight: 500,
+                      fontSize: 8,
+                    }}
+                  >
+                    {name}
+                  </text>
+                  <text
+                    x={0}
+                    y={7}
+                    textAnchor="middle"
+                    style={{
+                      fontFamily: "Inter, system-ui",
+                      fill: "#666",
+                      fontSize: 7,
+                    }}
+                  >
+                    {`[${coordinates[0].toFixed(3)}, ${coordinates[1].toFixed(3)}]`}
+                  </text>
+                </g>
+
+                <title>
+                  {name}
+                  {description ? `\n${description}` : ""}
+                </title>
+              </Marker>
+            ))}
           </ZoomableGroup>
         </ComposableMap>
         {/* Floating Tooltip for Province */}
@@ -339,7 +418,7 @@ const Tab5: React.FC = () => {
           <div
             style={{
               ...tooltipStyle,
-              left: tooltipPos.x + 120,
+              // left: tooltipPos.x + 120,
               top: tooltipPos.y + 40,
               opacity: 1,
             }}
@@ -385,7 +464,7 @@ const Tab5: React.FC = () => {
           <div
             style={{
               ...tooltipStyle,
-              left: tooltipPos.x + 160,
+              // left: tooltipPos.x + 160,
               top: tooltipPos.y + 60,
               opacity: 1,
             }}
@@ -415,6 +494,32 @@ const Tab5: React.FC = () => {
           </div>
         )}
       </div>
+      <style>
+        {`
+                    .pulse-circle {
+                        fill: none;
+                        stroke: #ff5533;
+                        stroke-width: 2;
+                        animation: pulse 2s infinite;
+                        opacity: 0.5;
+                    }
+
+                    @keyframes pulse {
+                        0% {
+                            r: 5;
+                            opacity: 0.8;
+                        }
+                        70% {
+                            r: 12;
+                            opacity: 0;
+                        }
+                        100% {
+                            r: 5;
+                            opacity: 0;
+                        }
+                    }
+                `}
+      </style>
     </div>
   );
 };

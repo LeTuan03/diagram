@@ -9,7 +9,7 @@ import {
     Radar
 } from 'recharts';
 import { MapPin, TrendingUp, Users, Activity } from 'lucide-react';
-import Tab6 from '../tab6/Tab6';
+import Tab5 from '../tab5/Tab5';
 
 const Tab7: React.FC = () => {
     const barData = [
@@ -139,7 +139,7 @@ const Tab7: React.FC = () => {
 
                 {/* Cột giữa - bản đồ */}
                 <div className="col-span-6">
-                    <Tab6 />
+                    <Tab5 />
                 </div>
 
                 {/* Cột phải */}
