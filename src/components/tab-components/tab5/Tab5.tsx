@@ -23,29 +23,66 @@ const COLORS = [
 
 const _markers = [
   {
-    name: "Bệnh viện A",
-    coordinates: [106.93732619000005, 11.355454453000069],
-    description: "Bệnh viện A phục vụ khu vực phía Đông."
+    "TenTinh": "Cần Thơ", coordinates: [105.495437622000097, 10.325348854000039]
   },
   {
-    name: "Cửa hàng B",
-    coordinates: [106.700981, 10.776530],
-    description: "Cửa hàng B nổi tiếng với các sản phẩm địa phương."
-  }
+    "TenTinh": "Hồ Chí Minh", coordinates: [106.088802392, 8.578303795000098]
+  },
+  {
+    "TenTinh": "An Giang", coordinates: [103.46894836400007, 9.256015778000071]
+  },
+  {
+    "TenTinh": "Cà Mau", coordinates: [104.87905120800005, 8.381584167000023]
+  },
+  {
+    "TenTinh": "Đồng Nai", coordinates: [107.206329346000075, 12.295455933000046]
+  },
+  {
+    "TenTinh": "Đồng Tháp", coordinates: [105.433212280000049, 10.97314262400001]
+  },
+  {
+    "TenTinh": "Tây Ninh", coordinates: [106.043205261000082, 11.778791428000035]
+  },
+  {
+    "TenTinh": "Vĩnh Long", coordinates: [106.414848328000076, 10.326982498000026]
+  },
 ];
 
 
 const _markersScaled = [
   {
-    name: "Bệnh viện HCM",
-    coordinates: [105.9202, 11.5864],
-    description: "Bệnh viện HCM phục vụ khu vực phía Đông."
+    "TenTinh": "Phường An Đông", coordinates: [106.674016107000057, 10.748681597000029]
   },
   {
-    name: "Cửa hàng OMO",
-    coordinates: [106.5604, 9.8939],
-    description: "Cửa hàng OMO nổi tiếng với các sản phẩm địa phương."
-  }
+    "TenTinh": "Phường An Hội Đông", coordinates: [106.663438494000047, 10.855518486000051]
+  },
+  {
+    "TenTinh": "Phường An Hội Tây", coordinates: [106.640130133000071, 10.844348982000042]
+  },
+  {
+    "TenTinh": "Phường An Khánh", coordinates: [106.750249515000064, 10.803396250000048]
+  },
+  {
+    "TenTinh": "Phường An Lạc", coordinates: [106.611628149000069, 10.758104464000041]
+  },
+  {
+    "TenTinh": "Phường An Nhơn", coordinates: [106.700556908000067, 10.828338429000041]
+  },
+  {
+    "TenTinh": "Phường Tân Lộc", coordinates: [105.599334717000033, 10.239066124000033],
+  },
+  {
+    "TenTinh": "Phường Trung Nhứt", coordinates: [105.515563965000069, 10.265884399000072],
+  },
+  {
+    "TenTinh": "Xã Kế Sách", coordinates: [105.937863061000087, 9.816129570000044],
+  },
+  {
+    "TenTinh": "Xã An Lạc Thôn", coordinates: [105.906036377000078, 9.931975365000028],
+  },
+  {
+    "TenTinh": "Xã Phong Nẫm", coordinates: [105.998748779000039, 9.856869698000025],
+  },
 ];
 
 // Vị trí mẫu cho dân số (populations)
@@ -53,17 +90,14 @@ const _populations = [
   {
     name: "Trường học C",
     coordinates: [105.0297, 10.1808],
-    description: "Trường học C có số dân học sinh lớn."
   },
   {
     name: "Khu dân cư D",
     coordinates: [105.7593, 9.7420],
-    description: "Khu dân cư D tập trung đông dân cư."
   },
   {
     name: "Bệnh viện E",
     coordinates: [106.2937, 9.9944],
-    description: "Bệnh viện E phục vụ khu vực phía Bắc."
   }
 ];
 
@@ -71,17 +105,14 @@ const _populationsScaled = [
   {
     name: "Trường học D",
     coordinates: [103.9913, 10.2707],
-    description: "Trường học D có số dân học sinh lớn."
   },
   {
     name: "Khu dân cư E",
     coordinates: [105.0177, 9.1522],
-    description: "Khu dân cư E tập trung đông dân cư."
   },
   {
     name: "Bệnh viện F",
     coordinates: [105.7372, 9.3670],
-    description: "Bệnh viện F phục vụ khu vực phía Bắc."
   }
 ];
 
@@ -409,8 +440,8 @@ const Tab5: React.FC = () => {
             </Geographies>
 
             {/* Hiển thị marker cho từng địa điểm từ geojson */}
-            {displayMarkers.map(({ name, coordinates, description }, idx) => (
-              <Marker key={name + idx} coordinates={coordinates}>
+            {displayMarkers.map(({ TenTinh, coordinates, description }, idx) => (
+              <Marker key={TenTinh + idx} coordinates={coordinates}>
                 <g transform="translate(-5, -10)" className="modern-marker">
                   <circle cx="6" cy="5" r="2" fill="#FF5533" opacity={0.85} />
                   <circle className="pulse-circle" cx="6" cy="5" r="2" />
@@ -425,10 +456,10 @@ const Tab5: React.FC = () => {
 
                 <g transform="translate(0, -20)">
                   <rect
-                    x={-30}
+                    x={-(TenTinh.length * 4)}
                     y={-10}
-                    width={60}
-                    height={20}
+                    width={TenTinh.length * 8}
+                    height={13}
                     rx={5}
                     ry={5}
                     fill="rgba(255, 255, 255, 0.85)"
@@ -445,27 +476,15 @@ const Tab5: React.FC = () => {
                       fill: "#111",
                       fontWeight: 500,
                       fontSize: 8,
+                      textAlign: "center",
                     }}
                   >
-                    {name}
-                  </text>
-                  <text
-                    x={0}
-                    y={7}
-                    textAnchor="middle"
-                    style={{
-                      fontFamily: "Inter, system-ui",
-                      fill: "#666",
-                      fontSize: 7,
-                    }}
-                  >
-                    {`[${coordinates[0].toFixed(3)}, ${coordinates[1].toFixed(3)}]`}
+                    {TenTinh}
                   </text>
                 </g>
 
                 <title>
-                  {name}
-                  {description ? `\n${description}` : ""}
+                  {TenTinh}
                 </title>
               </Marker>
             ))}
