@@ -13,7 +13,7 @@ function App() {
   const tabs = [
     {
       label: "Home 1",
-      content: <Tab1 />,
+      content: <Tab7 />,
     },
     {
       label: "Home 2",

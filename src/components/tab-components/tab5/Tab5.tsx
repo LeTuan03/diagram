@@ -21,7 +21,7 @@ const COLORS = [
   "#6C63FF", "#00B894", "#0984E3", "#FD7272", "#FDCB6E", "#00CEC9", "#D35400"
 ];
 
-const markers = [
+const _markers = [
   {
     name: "Bệnh viện A",
     coordinates: [106.93732619000005, 11.355454453000069],
@@ -34,6 +34,56 @@ const markers = [
   }
 ];
 
+
+const _markersScaled = [
+  {
+    name: "Bệnh viện HCM",
+    coordinates: [105.9202, 11.5864],
+    description: "Bệnh viện HCM phục vụ khu vực phía Đông."
+  },
+  {
+    name: "Cửa hàng OMO",
+    coordinates: [106.5604, 9.8939],
+    description: "Cửa hàng OMO nổi tiếng với các sản phẩm địa phương."
+  }
+];
+
+// Vị trí mẫu cho dân số (populations)
+const _populations = [
+  {
+    name: "Trường học C",
+    coordinates: [105.0297, 10.1808],
+    description: "Trường học C có số dân học sinh lớn."
+  },
+  {
+    name: "Khu dân cư D",
+    coordinates: [105.7593, 9.7420],
+    description: "Khu dân cư D tập trung đông dân cư."
+  },
+  {
+    name: "Bệnh viện E",
+    coordinates: [106.2937, 9.9944],
+    description: "Bệnh viện E phục vụ khu vực phía Bắc."
+  }
+];
+
+const _populationsScaled = [
+  {
+    name: "Trường học D",
+    coordinates: [103.9913, 10.2707],
+    description: "Trường học D có số dân học sinh lớn."
+  },
+  {
+    name: "Khu dân cư E",
+    coordinates: [105.0177, 9.1522],
+    description: "Khu dân cư E tập trung đông dân cư."
+  },
+  {
+    name: "Bệnh viện F",
+    coordinates: [105.7372, 9.3670],
+    description: "Bệnh viện F phục vụ khu vực phía Bắc."
+  }
+];
 
 const Tab5: React.FC = () => {
   const [zoomLevel, setZoomLevel] = useState(2);
@@ -55,6 +105,14 @@ const Tab5: React.FC = () => {
 
   const displayGeoJSON = useMemo(() => {
     return zoomLevel > 2 ? phuongXaGeojson : tinhGeojson;
+  }, [zoomLevel]);
+
+  const displayMarkers = useMemo(() => {
+    return zoomLevel > 2 ? _markersScaled : _markers;
+  }, [zoomLevel]);
+
+  const displayPopulations = useMemo(() => {
+    return zoomLevel > 2 ? _populationsScaled : _populations;
   }, [zoomLevel]);
 
   // Tính center cho map
@@ -351,7 +409,7 @@ const Tab5: React.FC = () => {
             </Geographies>
 
             {/* Hiển thị marker cho từng địa điểm từ geojson */}
-            {markers.map(({ name, coordinates, description }, idx) => (
+            {displayMarkers.map(({ name, coordinates, description }, idx) => (
               <Marker key={name + idx} coordinates={coordinates}>
                 <g transform="translate(-5, -10)" className="modern-marker">
                   <circle cx="6" cy="5" r="2" fill="#FF5533" opacity={0.85} />
@@ -411,6 +469,59 @@ const Tab5: React.FC = () => {
                 </title>
               </Marker>
             ))}
+
+            {/* Hiển thị marker populations cho từng địa điểm từ geojson */}
+            {displayPopulations.map(({ name, coordinates }, idx) => (
+              <Marker key={name + idx} coordinates={coordinates}>
+                <g
+                  style={{ cursor: 'pointer' }}
+                  onMouseEnter={(e) => {
+                    const circle = e.currentTarget.querySelector('circle');
+                    circle.setAttribute('r', '6');
+                    circle.setAttribute('fill', '#00cec9');
+                  }}
+                  onMouseLeave={(e) => {
+                    const circle = e.currentTarget.querySelector('circle');
+                    circle.setAttribute('r', '5');
+                    circle.setAttribute('fill', 'rgba(0, 184, 148, 0.65)');
+                  }}
+                >
+                  {/* Marker Circle with shadow and smooth transition */}
+                  <circle
+                    cx={0}
+                    cy={0}
+                    r={5}
+                    fill="rgba(0, 184, 148, 0.65)"
+                    stroke="white"
+                    strokeWidth={1.8}
+                    style={{
+                      filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.25))',
+                      transition: 'all 0.3s ease',
+                    }}
+                  >
+                    <title>{name}</title> {/* Tooltip */}
+                  </circle>
+
+                  {/* Coordinates Text */}
+                  <text
+                    x={0}
+                    y={-10}
+                    textAnchor="middle"
+                    style={{
+                      fontFamily: "'Poppins', sans-serif",
+                      fill: '#fff',
+                      fontWeight: 600,
+                      fontSize: 6,
+                      pointerEvents: 'none',
+                      userSelect: 'none',
+                    }}
+                  >
+                    {`${coordinates[0].toFixed(2)},${coordinates[1].toFixed(2)}`}
+                  </text>
+                </g>
+              </Marker>
+            ))}
+
           </ZoomableGroup>
         </ComposableMap>
         {/* Floating Tooltip for Province */}
@@ -422,7 +533,6 @@ const Tab5: React.FC = () => {
               top: tooltipPos.y + 40,
               opacity: 1,
             }}
-            onClick={() => setSelectedProvince(null)}
           >
             <div className="flex items-center gap-2 mb-2">
               <FaMapMarkerAlt color="#6C63FF" />
@@ -468,7 +578,6 @@ const Tab5: React.FC = () => {
               top: tooltipPos.y + 60,
               opacity: 1,
             }}
-            onClick={() => setSelectedPoint(null)}
           >
             <div className="flex items-center gap-2 mb-2">
               <FaMapMarkerAlt color="#00b894" />
