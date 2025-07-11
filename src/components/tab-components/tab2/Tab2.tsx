@@ -31,45 +31,45 @@ export const Tab2: React.FC = () => {
   // Sample data
   const dashboardData: DashboardData = {
     worldData: [
-      { country: 'China', value: 1500 },
-      { country: 'United States', value: 1200 },
-      { country: 'Japan', value: 800 },
-      { country: 'Germany', value: 600 },
-      { country: 'United Kingdom', value: 500 },
-      { country: 'France', value: 450 },
-      { country: 'India', value: 400 },
+      { country: 'Trung Quốc', value: 1500 },
+      { country: 'Hoa Kỳ', value: 1200 },
+      { country: 'Nhật Bản', value: 800 },
+      { country: 'Đức', value: 600 },
+      { country: 'Vương quốc Anh', value: 500 },
+      { country: 'Pháp', value: 450 },
+      { country: 'Ấn Độ', value: 400 },
       { country: 'Brazil', value: 350 },
       { country: 'Canada', value: 300 },
-      { country: 'Australia', value: 250 },
+      { country: 'Úc', value: 250 },
     ],
     barChartData: [
-      { name: 'Q1 2024', value: 2400 },
-      { name: 'Q2 2024', value: 1398 },
-      { name: 'Q3 2024', value: 9800 },
-      { name: 'Q4 2024', value: 3908 },
+      { name: 'Quý 1 2024', value: 2400 },
+      { name: 'Quý 2 2024', value: 1398 },
+      { name: 'Quý 3 2024', value: 9800 },
+      { name: 'Quý 4 2024', value: 3908 },
     ],
     pieChartData: [
-      { name: 'Desktop', value: 400 },
-      { name: 'Mobile', value: 300 },
-      { name: 'Tablet', value: 200 },
-      { name: 'Smart TV', value: 150 },
-      { name: 'Others', value: 100 },
+      { name: 'Máy tính', value: 400 },
+      { name: 'Di động', value: 300 },
+      { name: 'Máy tính bảng', value: 200 },
+      { name: 'TV thông minh', value: 150 },
+      { name: 'Khác', value: 100 },
     ],
     lineChartData: [
-      { name: 'Jan', value: 400 },
-      { name: 'Feb', value: 300 },
-      { name: 'Mar', value: 500 },
-      { name: 'Apr', value: 280 },
-      { name: 'May', value: 590 },
-      { name: 'Jun', value: 320 },
-      { name: 'Jul', value: 450 },
-      { name: 'Aug', value: 680 },
+      { name: 'Tháng 1', value: 400 },
+      { name: 'Tháng 2', value: 300 },
+      { name: 'Tháng 3', value: 500 },
+      { name: 'Tháng 4', value: 280 },
+      { name: 'Tháng 5', value: 590 },
+      { name: 'Tháng 6', value: 320 },
+      { name: 'Tháng 7', value: 450 },
+      { name: 'Tháng 8', value: 680 },
     ],
     stats: [
-      { title: 'Global Users', value: '2.4M', change: '+15.3%', icon: Users, trend: 'up' },
-      { title: 'Revenue', value: '$1.25M', change: '+8.2%', icon: DollarSign, trend: 'up' },
-      { title: 'Active Regions', value: '47', change: '+3', icon: MapPin, trend: 'up' },
-      { title: 'Conversion Rate', value: '4.24%', change: '+0.8%', icon: Target, trend: 'up' },
+      { title: 'Người dùng toàn cầu', value: '2.4M', change: '+15.3%', icon: Users, trend: 'up' },
+      { title: 'Doanh thu', value: '$1.25M', change: '+8.2%', icon: DollarSign, trend: 'up' },
+      { title: 'Khu vực hoạt động', value: '47', change: '+3', icon: MapPin, trend: 'up' },
+      { title: 'Tỷ lệ chuyển đổi', value: '4.24%', change: '+0.8%', icon: Target, trend: 'up' },
     ]
   };
 
@@ -216,7 +216,7 @@ export const Tab2: React.FC = () => {
               <div className="absolute left-0 top-1/2 transform -translate-y-1/2 space-y-6">
                 <div className="w-80 h-48 pointer-events-auto group transition-transform duration-500 hover:scale-105">
                   <div className="relative w-full h-full rounded-xl bg-white/5 backdrop-blur-md border border-white/10 shadow-md">
-                    <GoogleBarChart data={dashboardData.barChartData} title="季度业绩分析" />
+                    <GoogleBarChart data={dashboardData.barChartData} title="Phân tích hiệu suất hàng quý" />
                     <div className="absolute -top-4 left-4 bg-blue-500 rounded-full p-2 shadow-lg">
                       <BarChart3 className="w-4 h-4 text-white" />
                     </div>
@@ -225,7 +225,7 @@ export const Tab2: React.FC = () => {
                 
                 <div className="w-80 h-48 pointer-events-auto group transition-transform duration-500 hover:scale-105">
                   <div className="relative w-full h-full rounded-xl bg-white/5 backdrop-blur-md border border-white/10 shadow-md">
-                    <GoogleLineChart data={dashboardData.lineChartData} title="增长趋势分析" />
+                    <GoogleLineChart data={dashboardData.lineChartData} title="Phân tích xu hướng tăng trưởng" />
                     <div className="absolute -top-4 left-4 bg-green-500 rounded-full p-2 shadow-lg">
                       <TrendingUp className="w-4 h-4 text-white" />
                     </div>
@@ -237,7 +237,7 @@ export const Tab2: React.FC = () => {
               <div className="absolute right-0 top-1/2 transform -translate-y-1/2 space-y-6">
                 <div className="w-80 h-48 pointer-events-auto group transition-transform duration-500 hover:scale-105">
                   <div className="relative w-full h-full rounded-xl bg-white/5 backdrop-blur-md border border-white/10 shadow-md">
-                    <GooglePieChart data={dashboardData.pieChartData} title="设备分布统计" />
+                    <GooglePieChart data={dashboardData.pieChartData} title="Thống kê phân phối thiết bị" />
                     <div className="absolute -top-4 right-4 bg-purple-500 rounded-full p-2 shadow-lg">
                       <PieChart className="w-4 h-4 text-white" />
                     </div>
@@ -247,13 +247,13 @@ export const Tab2: React.FC = () => {
                 <div className="w-80 h-48 pointer-events-auto group transition-transform duration-500 hover:scale-105">
                   <div className="relative w-full h-full rounded-xl bg-white/5 backdrop-blur-md border border-white/10 shadow-md">
                     <div className="p-4 h-full">
-                      <h3 className="text-cyan-300 font-semibold text-sm mb-4">实时数据监控</h3>
+                      <h3 className="text-cyan-300 font-semibold text-sm mb-4">Giám sát dữ liệu thời gian thực</h3>
                       <div className="space-y-3">
                         {[
-                          { label: '在线用户', value: '24,567', color: 'text-green-400' },
-                          { label: '活跃会话', value: '8,432', color: 'text-blue-400' },
-                          { label: '数据传输', value: '1.2GB/s', color: 'text-yellow-400' },
-                          { label: '系统负载', value: '67%', color: 'text-orange-400' }
+                          { label: 'Người dùng trực tuyến', value: '24,567', color: 'text-green-400' },
+                          { label: 'Phiên hoạt động', value: '8,432', color: 'text-blue-400' },
+                          { label: 'Truyền dữ liệu', value: '1.2GB/s', color: 'text-yellow-400' },
+                          { label: 'Tải hệ thống', value: '67%', color: 'text-orange-400' }
                         ].map((item, index) => (
                           <div key={index} className="flex justify-between items-center">
                             <span className="text-gray-300 text-sm">{item.label}</span>
@@ -277,14 +277,14 @@ export const Tab2: React.FC = () => {
       <div className={`fixed bottom-6 right-6 w-80 bg-black/50 backdrop-blur-sm border border-cyan-400/30 rounded-xl p-4 z-30 ${isFullscreen ? 'hidden' : ''}`}>
         <h4 className="text-white font-semibold mb-3 flex items-center">
           <Activity className="w-4 h-4 mr-2" />
-          实时活动监控
+          Giám sát hoạt động theo thời gian thực
         </h4>
         <div className="space-y-2 max-h-32 overflow-y-auto">
           {[
-            { color: 'green', text: '北京新用户接入', time: '2秒前' },
-            { color: 'blue', text: '数据同步完成', time: '15秒前' },
-            { color: 'orange', text: '高流量预警', time: '1分钟前' },
-            { color: 'purple', text: '报告生成完毕', time: '3分钟前' }
+            { color: 'green', text: 'Người dùng mới ở Hà Nội', time: '2 giây trước' },
+            { color: 'blue', text: 'Đồng bộ dữ liệu hoàn tất', time: '15 giây trước' },
+            { color: 'orange', text: 'Cảnh báo lưu lượng cao', time: '1 phút trước' },
+            { color: 'purple', text: 'Báo cáo đã được tạo', time: '3 phút trước' }
           ].map((activity, index) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <div className={`w-2 h-2 bg-${activity.color}-400 rounded-full animate-pulse`}></div>
