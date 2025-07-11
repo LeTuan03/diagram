@@ -46,7 +46,7 @@ export const GooglePieChart: React.FC<GooglePieChartProps> = ({ data, title }) =
   };
 
   return (
-    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
+    <div className=" backdrop-blur-sm rounded-xl p-6">
       <div className="h-80">
         <Chart
           chartType="PieChart"

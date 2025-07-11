@@ -5,14 +5,14 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 
 const data = [
-  { id: "US", name: "United States", threatened: 10, updated: 15 },
-  { id: "CN", name: "China", threatened: 40, updated: 35 },
+  // { id: "US", name: "United States", threatened: 10, updated: 15 },
+  // { id: "CN", name: "China", threatened: 40, updated: 35 },
   { id: "VN", name: "Vietnam", threatened: 50, updated: 45 },
-  { id: "KH", name: "Cambodia", threatened: 55, updated: 49 },
-  { id: "EU", name: "European Union", threatened: 30, updated: 20 },
-  { id: "BD", name: "Bangladesh", threatened: 38, updated: 37 },
-  { id: "LK", name: "Sri Lanka", threatened: 48, updated: 44 },
-  { id: "IN", name: "India", threatened: 25, updated: 26 }
+  // { id: "KH", name: "Cambodia", threatened: 55, updated: 49 },
+  // { id: "EU", name: "European Union", threatened: 30, updated: 20 },
+  // { id: "BD", name: "Bangladesh", threatened: 38, updated: 37 },
+  // { id: "LK", name: "Sri Lanka", threatened: 48, updated: 44 },
+  // { id: "IN", name: "India", threatened: 25, updated: 26 } 
 ];
 
 // Tạo theme riêng

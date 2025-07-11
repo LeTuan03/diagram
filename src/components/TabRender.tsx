@@ -33,7 +33,7 @@ const TabRender: React.FC<TabRenderProps> = ({ tabs }) => {
                     </button>
                 ))}
             </div>
-            <div style={{ padding: '16px 0' }}>
+            <div style={{ padding: '0px 0' }}>
                 {tabs[activeIndex]?.content}
             </div>
         </div>
