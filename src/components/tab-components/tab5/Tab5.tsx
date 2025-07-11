@@ -26,7 +26,7 @@ const _markers = [
     "TenTinh": "Cần Thơ", coordinates: [105.495437622000097, 10.325348854000039]
   },
   {
-    "TenTinh": "Hồ Chí Minh", coordinates: [106.088802392, 8.578303795000098]
+    "TenTinh": "Hồ Chí Minh", coordinates: [106.8466, 10.8634]
   },
   {
     "TenTinh": "An Giang", coordinates: [103.46894836400007, 9.256015778000071]
