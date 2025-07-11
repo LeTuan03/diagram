@@ -13,7 +13,7 @@ function App() {
   const tabs = [
     {
       label: "Home 1",
-      content: <Tab7 />,
+      content: <Tab1 />,
     },
     {
       label: "Home 2",
@@ -33,10 +33,6 @@ function App() {
     },
     {
       label: "Home 6",
-      content: <Tab6 />,
-    },
-    {
-      label: "Home 7",
       content: <Tab7 />,
     }
   ]
