@@ -1,178 +1,219 @@
-import { useMemo, useState } from "react";
+import React from 'react';
 import {
-    ComposableMap,
-    Geographies,
-    Geography,
-    ZoomableGroup,
-    Marker
-} from "react-simple-maps";
-import phuongXaGeojson from "../tab5/geoData/phuongxa8TinhNamBo_WGS84.json";
-import tinhGeojson from "../tab5/geoData/TinhNamBo_WGS84_RanhTinh_v2.json";
+    BarChart, Bar, XAxis, YAxis, CartesianGrid,
+    ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell,
+    RadarChart,
+    PolarGrid,
+    PolarAngleAxis,
+    PolarRadiusAxis,
+    Radar
+} from 'recharts';
+import { MapPin, TrendingUp, Users, Activity } from 'lucide-react';
+import Tab5 from '../tab5/Tab5';
 
-// Danh sách các địa điểm mẫu
-const markers = [
-    {
-        name: "Bệnh viện A",
-        coordinates: [106.93732619000005, 11.355454453000069],
-        description: "Bệnh viện A phục vụ khu vực phía Đông."
-    },
-    {
-        name: "Cửa hàng B",
-        coordinates: [106.700981, 10.776530],
-        description: "Cửa hàng B nổi tiếng với các sản phẩm địa phương."
-    }
-];
+const Tab6: React.FC = () => {
+    const barData = [
+        { name: 'Hà Nội', value: 771 },
+        { name: 'TP.HCM', value: 652 },
+        { name: 'Đà Nẵng', value: 542 },
+        { name: 'Cần Thơ', value: 487 },
+        { name: 'Hải Phòng', value: 386 },
+        { name: 'Nha Trang', value: 298 },
+    ];
 
-const Tab6 = () => {
-    const [zoomLevel, setZoomLevel] = useState(2);
+    const lineData = [
+        { name: 'Tháng 1', value: 400 },
+        { name: 'Tháng 2', value: 300 },
+        { name: 'Tháng 3', value: 600 },
+        { name: 'Tháng 4', value: 800 },
+        { name: 'Tháng 5', value: 500 },
+        { name: 'Tháng 6', value: 700 },
+    ];
 
-    // Chọn geojson phù hợp theo zoomLevel
-    const displayGeoJSON = useMemo(() => {
-        return zoomLevel > 2 ? phuongXaGeojson : tinhGeojson;
-    }, [zoomLevel]);
+    const pieData = [
+        { name: 'Loại A', value: 35, color: '#00D4FF' },
+        { name: 'Loại B', value: 25, color: '#FF6B9D' },
+        { name: 'Loại C', value: 20, color: '#4ECDC4' },
+        { name: 'Loại D', value: 20, color: '#45B7D1' },
+    ];
 
-    // Tính center mặc định (có thể lấy từ geojson hoặc tự xác định)
-    const defaultCenter: [number, number] = [106.660172, 10.762622];
+    const regionData = [
+        {
+            subject: 'Hà Nội',
+            A: 120,
+            B: 110,
+            fullMark: 150,
+        },
+        {
+            subject: 'TP.HCM',
+            A: 98,
+            B: 130,
+            fullMark: 150,
+        },
+        {
+            subject: 'Đà Nẵng',
+            A: 86,
+            B: 130,
+            fullMark: 150,
+        },
+        {
+            subject: 'Cần Thơ',
+            A: 99,
+            B: 100,
+            fullMark: 150,
+        },
+        {
+            subject: 'Hải Phòng',
+            A: 85,
+            B: 90,
+            fullMark: 150,
+        },
+        {
+            subject: 'Nha Trang',
+            A: 65,
+            B: 85,
+            fullMark: 150,
+        },
+    ];
 
     return (
-        <ComposableMap
-            projection="geoMercator"
-            projectionConfig={{
-                scale: 5000,
-            }}
-            width={800}
-            height={400}
-            style={{ width: "100%", height: "100%" }}
-        >
-            <ZoomableGroup
-                center={defaultCenter}
-                zoom={zoomLevel}
-                onMoveEnd={({ zoom }) => {
-                    const clamped = Math.min(Math.max(zoom, 1), 10);
-                    setZoomLevel(clamped);
-                }}
-                minZoom={1}
-                maxZoom={10}
-                transitionDuration={350}
-            >
-                <Geographies geography={displayGeoJSON}>
-                    {({ geographies }) =>
-                        geographies.map((geo, idx) => (
-                            <Geography
-                                key={geo.rsmKey}
-                                geography={geo}
-                                fill={zoomLevel > 1 ? "#EAEAEC" : "#D6D6DA"}
-                                stroke="#888"
-                                style={{
-                                    default: {
-                                        outline: "none",
-                                        transition: "all 0.2s"
-                                    },
-                                    hover: {
-                                        fill: "#6366f1",
-                                        cursor: "pointer",
-                                        outline: "none"
-                                    },
-                                    pressed: {
-                                        fill: "#6c5ce7",
-                                        outline: "none"
-                                    }
-                                }}
-                            />
-                        ))
-                    }
-                </Geographies>
-                {/* Hiển thị marker cho từng địa điểm từ geojson */}
-                {markers.map(({ name, coordinates, description }, idx) => (
-                    <Marker key={name + idx} coordinates={coordinates}>
-                        {/* Marker rất nhỏ */}
-                        <g transform="translate(-5, -10)" className="modern-marker">
-                            <circle cx="6" cy="5" r="2" fill="#FF5533" opacity={0.85} />
-                            <circle className="pulse-circle" cx="6" cy="5" r="2" />
-                            <path
-                                d="M6 11C8.7 9 10 7 10 5a4 4 0 1 0-8 0c0 2 1.3 4 4 6z"
-                                fill="#FF5533"
-                                stroke="white"
-                                strokeWidth="0.6"
-                                opacity={0.95}
-                            />
-                        </g>
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white p-6">
+            {/* Lưới chính */}
+            <div className="grid grid-cols-12 gap-6 h-full">
+                {/* Cột trái */}
+                <div className="col-span-3 space-y-6">
+                    {/* Biểu đồ cột */}
+                    <div className="p-6">
+                        <h3 className="text-lg font-semibold mb-4 text-blue-300">Xếp Hạng Thành Phố</h3>
+                        <ResponsiveContainer width="100%" height={200}>
+                            <BarChart data={barData}>
+                                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                                <XAxis dataKey="name" tick={{ fill: '#9CA3AF', fontSize: 12 }} />
+                                <YAxis tick={{ fill: '#9CA3AF', fontSize: 12 }} />
+                                <Bar dataKey="value" fill="#00D4FF" />
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
 
-                        {/* Label rất nhỏ */}
-                        <g transform="translate(0, -20)">
-                            <rect
-                                x={-30}
-                                y={-10}
-                                width={60}
-                                height={20}
-                                rx={5}
-                                ry={5}
-                                fill="rgba(255, 255, 255, 0.85)"
-                                stroke="#ddd"
-                                strokeWidth={0.6}
-                                filter="url(#shadow)"
-                            />
-                            <text
-                                x={0}
-                                y={-1}
-                                textAnchor="middle"
-                                style={{
-                                    fontFamily: "Inter, system-ui",
-                                    fill: "#111",
-                                    fontWeight: 500,
-                                    fontSize: 8,
-                                }}
-                            >
-                                {name}
-                            </text>
-                            <text
-                                x={0}
-                                y={7}
-                                textAnchor="middle"
-                                style={{
-                                    fontFamily: "Inter, system-ui",
-                                    fill: "#666",
-                                    fontSize: 7,
-                                }}
-                            >
-                                {`[${coordinates[0].toFixed(3)}, ${coordinates[1].toFixed(3)}]`}
-                            </text>
-                        </g>
+                    {/* Biểu đồ tròn */}
+                    <div className="p-6">
+                        <h3 className="text-lg font-semibold mb-4 text-blue-300">Phân Bố Dữ Liệu</h3>
+                        <ResponsiveContainer width="100%" height={200}>
+                            <PieChart>
+                                <Pie
+                                    data={pieData}
+                                    cx="50%"
+                                    cy="50%"
+                                    innerRadius={40}
+                                    outerRadius={80}
+                                    paddingAngle={5}
+                                    dataKey="value"
+                                >
+                                    {pieData.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={entry.color} />
+                                    ))}
+                                </Pie>
+                            </PieChart>
+                        </ResponsiveContainer>
+                    </div>
 
-                        <title>
-                            {name}
-                            {description ? `\n${description}` : ""}
-                        </title>
-                    </Marker>
-                ))}
-            </ZoomableGroup>
-            <style>
-                {`
-                    .pulse-circle {
-                        fill: none;
-                        stroke: #ff5533;
-                        stroke-width: 2;
-                        animation: pulse 2s infinite;
-                        opacity: 0.5;
-                    }
+                    {/* Thống kê thời gian thực */}
+                    <div className="p-6">
+                        <h3 className="text-lg font-semibold mb-4 text-blue-300">Dữ Liệu Thời Gian Thực</h3>
+                        <div className="space-y-3">
+                            <div className="flex justify-between items-center">
+                                <span className="text-gray-400">Người Dùng Trực Tuyến</span>
+                                <span className="text-2xl font-bold text-cyan-400">1,234</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                                <span className="text-gray-400">Tổng Lượt Truy Cập</span>
+                                <span className="text-2xl font-bold text-green-400">45,678</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                                <span className="text-gray-400">Tỷ Lệ Chuyển Đổi</span>
+                                <span className="text-2xl font-bold text-yellow-400">78%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                    @keyframes pulse {
-                        0% {
-                            r: 5;
-                            opacity: 0.8;
-                        }
-                        70% {
-                            r: 12;
-                            opacity: 0;
-                        }
-                        100% {
-                            r: 5;
-                            opacity: 0;
-                        }
-                    }
-                `}
-            </style>
-        </ComposableMap>
+                {/* Cột giữa - bản đồ */}
+                <div className="col-span-6">
+                    <Tab5 />
+                </div>
+
+                {/* Cột phải */}
+                <div className="col-span-3 space-y-6">
+                    {/* Thống kê ngắn */}
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-4 border border-blue-500/20">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <div className="text-2xl font-bold text-blue-400">54</div>
+                                    <div className="text-sm text-gray-400">Thiết Bị Hoạt Động</div>
+                                </div>
+                                <Activity className="w-8 h-8 text-blue-400" />
+                            </div>
+                        </div>
+                        <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-4 border border-blue-500/20">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <div className="text-2xl font-bold text-cyan-400">377</div>
+                                    <div className="text-sm text-gray-400">Kết Nối Tổng</div>
+                                </div>
+                                <Users className="w-8 h-8 text-cyan-400" />
+                            </div>
+                        </div>
+                        <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-4 border border-blue-500/20">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <div className="text-2xl font-bold text-green-400">2,634</div>
+                                    <div className="text-sm text-gray-400">Khối Lượng Xử Lý</div>
+                                </div>
+                                <TrendingUp className="w-8 h-8 text-green-400" />
+                            </div>
+                        </div>
+                        <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-4 border border-blue-500/20">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <div className="text-2xl font-bold text-yellow-400">42</div>
+                                    <div className="text-sm text-gray-400">Sự Cố Cảnh Báo</div>
+                                </div>
+                                <MapPin className="w-8 h-8 text-yellow-400" />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Biểu đồ đường */}
+                    <div className="p-6">
+                        <h3 className="text-lg font-semibold mb-4 text-blue-300">Phân Tích Xu Hướng</h3>
+                        <ResponsiveContainer width="100%" height={200}>
+                            <LineChart data={lineData}>
+                                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                                <XAxis dataKey="name" tick={{ fill: '#9CA3AF', fontSize: 12 }} />
+                                <YAxis tick={{ fill: '#9CA3AF', fontSize: 12 }} />
+                                <Line type="monotone" dataKey="value" stroke="#00D4FF" strokeWidth={2} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+
+                    {/* Dữ liệu vùng */}
+                    <div className="p-6">
+                        <h3 className="text-lg font-semibold mb-4 text-blue-300">Dữ Liệu Theo Khu Vực</h3>
+                        <div className="space-y-4">
+                            <ResponsiveContainer width="100%" height={225}>
+                                <RadarChart cx="50%" cy="50%" outerRadius="80%" data={regionData}>
+                                    <PolarGrid />
+                                    <PolarAngleAxis dataKey="subject" />
+                                    <PolarRadiusAxis />
+                                    <Radar name="A" dataKey="A" stroke="#00D4FF" fill="#00D4FF" fillOpacity={0.6} />
+                                </RadarChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 

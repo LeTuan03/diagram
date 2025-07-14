@@ -5,6 +5,7 @@ import Tab4 from "./components/tab-components/tab4/Tab4";
 import Tab5 from "./components/tab-components/tab5/Tab5";
 import Tab6 from "./components/tab-components/tab6/Tab6";
 import Tab7 from "./components/tab-components/tab7/Tab7";
+import Tab8 from "./components/tab-components/tab8/Tab8";
 
 import TabRender from "./components/TabRender";
 
@@ -33,8 +34,16 @@ function App() {
     },
     {
       label: "Home 6",
+      content: <Tab6 />,
+    },
+    {
+      label: "Home 7",
       content: <Tab7 />,
-    }
+    },
+    {
+      label: "Home 8",
+      content: <Tab8 />,
+    },
   ]
   return (
     <TabRender tabs={tabs} />
