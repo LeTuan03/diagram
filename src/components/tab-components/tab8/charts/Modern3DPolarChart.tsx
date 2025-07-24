@@ -7,6 +7,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { LabelTitleComponent } from '../../../LabelTitle';
 
 ChartJS.register(RadialLinearScale, ArcElement, PolarAreaController, Tooltip, Legend);
 
@@ -32,29 +33,29 @@ const Modern3DPolarChart: React.FC = () => {
         labels: ['Marketing', 'Development', 'Sales', 'Support', 'Operations'],
         datasets: [
           {
-            data: [40, 30, 25, 35, 20],
+            data: [40, 30, 25, 35, 20], 
             backgroundColor: [
-              'rgba(59, 130, 246, 0.7)',
-              'rgba(34, 197, 94, 0.7)',
-              'rgba(251, 146, 60, 0.7)',
-              'rgba(168, 85, 247, 0.7)',
-              'rgba(236, 72, 153, 0.7)',
+              'rgba(0, 128, 192, 0.7)',     // Deep Teal
+              'rgba(90, 200, 90, 0.7)',     // Olive Green
+              'rgba(100, 116, 139, 0.7)',   // Slate Gray
+              'rgba(55, 65, 81, 0.7)',      // Dark Graphite
+              'rgba(245, 218, 51, 0.7)',    // Cyber Yellow
             ],
             borderColor: [
-              'rgb(59, 130, 246)',
-              'rgb(34, 197, 94)',
-              'rgb(251, 146, 60)',
-              'rgb(168, 85, 247)',
-              'rgb(236, 72, 153)',
+              'rgba(0, 128, 192, 1)',
+              'rgba(90, 200, 90, 1)',
+              'rgba(100, 116, 139, 1)',
+              'rgba(55, 65, 81, 1)',
+              'rgba(245, 218, 51, 1)',
             ],
-            borderWidth: 3,
             hoverBackgroundColor: [
-              'rgba(59, 130, 246, 0.9)',
-              'rgba(34, 197, 94, 0.9)',
-              'rgba(251, 146, 60, 0.9)',
-              'rgba(168, 85, 247, 0.9)',
-              'rgba(236, 72, 153, 0.9)',
+              'rgba(0, 128, 192, 0.9)',
+              'rgba(90, 200, 90, 0.9)',
+              'rgba(100, 116, 139, 0.9)',
+              'rgba(55, 65, 81, 0.9)',
+              'rgba(245, 218, 51, 0.9)',
             ],
+            borderWidth: 2,
           },
         ],
       },
@@ -124,8 +125,8 @@ const Modern3DPolarChart: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative h-80">
-      <canvas ref={canvasRef} className="w-full h-full"></canvas>
+    <div className="relative h-45  mt-8">
+      <canvas ref={canvasRef} style={{ height: '260px' }}></canvas>
     </div>
   );
 };

@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { LabelTitleComponent } from '../../../LabelTitle';
 
 ChartJS.register(
   CategoryScale,
@@ -38,14 +39,15 @@ const ModernBarChart: React.FC = () => {
 
     // Create advanced 3D gradients
     const gradient1 = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient1.addColorStop(0, 'rgba(34, 197, 94, 1)');
-    gradient1.addColorStop(0.5, 'rgba(34, 197, 94, 0.8)');
-    gradient1.addColorStop(1, 'rgba(34, 197, 94, 0.3)');
+    gradient1.addColorStop(0, 'rgba(0, 128, 192, 1)');         // deep tech teal
+    gradient1.addColorStop(0.5, 'rgba(0, 128, 192, 0.6)');
+    gradient1.addColorStop(1, 'rgba(0, 128, 192, 0.2)');
 
     const gradient2 = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient2.addColorStop(0, 'rgba(168, 85, 247, 1)');
-    gradient2.addColorStop(0.5, 'rgba(168, 85, 247, 0.8)');
-    gradient2.addColorStop(1, 'rgba(168, 85, 247, 0.3)');
+    gradient2.addColorStop(0, 'rgba(90, 200, 90, 1)');          // deep soft green
+    gradient2.addColorStop(0.5, 'rgba(90, 200, 90, 0.6)');
+    gradient2.addColorStop(1, 'rgba(90, 200, 90, 0.2)');
+
 
     chartInstanceRef.current = new ChartJS(ctx, {
       type: 'bar',
@@ -56,27 +58,19 @@ const ModernBarChart: React.FC = () => {
             label: 'Sales',
             data: [65000, 89000, 73000, 95000],
             backgroundColor: gradient1,
-            borderColor: 'rgb(34, 197, 94)',
-            borderWidth: 3,
-            borderRadius: 12,
+            borderColor: 'rgba(0, 128, 192, 1)',   
+            borderWidth: 2,
+            borderRadius: 5,
             borderSkipped: false,
-            shadowColor: 'rgba(34, 197, 94, 0.4)',
-            shadowBlur: 15,
-            shadowOffsetX: 0,
-            shadowOffsetY: 8,
           },
           {
             label: 'Target',
             data: [70000, 85000, 78000, 92000],
             backgroundColor: gradient2,
-            borderColor: 'rgb(168, 85, 247)',
-            borderWidth: 3,
-            borderRadius: 12,
+            borderColor: 'rgba(90, 200, 90, 1)',
+            borderWidth: 2,
+            borderRadius: 5,
             borderSkipped: false,
-            shadowColor: 'rgba(168, 85, 247, 0.4)',
-            shadowBlur: 15,
-            shadowOffsetX: 0,
-            shadowOffsetY: 8,
           },
         ],
       },
@@ -102,8 +96,8 @@ const ModernBarChart: React.FC = () => {
             titleColor: '#fff',
             bodyColor: '#fff',
             borderColor: 'rgba(34, 197, 94, 0.8)',
-            borderWidth: 2,
-            cornerRadius: 15,
+            borderWidth: 1,
+            cornerRadius: 5,
             titleFont: {
               size: 14,
               weight: 'bold',
@@ -122,7 +116,7 @@ const ModernBarChart: React.FC = () => {
             beginAtZero: true,
             grid: {
               color: 'rgba(255, 255, 255, 0.1)',
-              drawBorder: false,
+              display: false,
             },
             ticks: {
               color: 'rgba(255, 255, 255, 0.7)',
@@ -130,7 +124,7 @@ const ModernBarChart: React.FC = () => {
                 size: 12,
                 weight: 'bold',
               },
-              callback: function(value) {
+              callback: function (value) {
                 return '$' + (value as number).toLocaleString();
               },
             },
@@ -162,7 +156,7 @@ const ModernBarChart: React.FC = () => {
 
     // Add custom shadow effect
     const originalDraw = chartInstanceRef.current.draw;
-    chartInstanceRef.current.draw = function() {
+    chartInstanceRef.current.draw = function () {
       ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
       ctx.shadowBlur = 20;
       ctx.shadowOffsetX = 0;
@@ -183,9 +177,9 @@ const ModernBarChart: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative h-80">
-      <canvas ref={canvasRef} className="w-full h-full"></canvas>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none rounded-lg"></div>
+    <div className="relative ">
+      <canvas ref={canvasRef} style={{ height: '260px' }}></canvas>
+      <div className="absolute inset-0"></div>
     </div>
   );
 };

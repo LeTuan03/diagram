@@ -11,6 +11,7 @@ import {
   Legend,
   Filler,
 } from 'chart.js';
+import { LabelTitleComponent } from '../../../LabelTitle';
 
 ChartJS.register(
   CategoryScale,
@@ -42,10 +43,11 @@ const ModernLineChart: React.FC = () => {
 
     // Create advanced 3D-like gradient
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, 'rgba(59, 130, 246, 0.9)');
-    gradient.addColorStop(0.3, 'rgba(147, 51, 234, 0.7)');
-    gradient.addColorStop(0.7, 'rgba(236, 72, 153, 0.4)');
-    gradient.addColorStop(1, 'rgba(236, 72, 153, 0.05)');
+    gradient.addColorStop(0, 'rgba(0, 128, 192, 0.9)');      // Deep Teal
+    gradient.addColorStop(0.4, 'rgba(90, 200, 90, 0.5)');     // Olive Green
+    gradient.addColorStop(0.8, 'rgba(100, 116, 139, 0.25)');  // Steel Gray
+    gradient.addColorStop(1, 'rgba(100, 116, 139, 0.05)');
+
 
     // Create shadow effect
     const shadowGradient = ctx.createLinearGradient(0, 350, 0, 400);
@@ -60,22 +62,15 @@ const ModernLineChart: React.FC = () => {
           {
             label: 'Revenue',
             data: [12000, 19000, 15000, 25000, 22000, 30000, 28000, 35000, 32000, 38000, 42000, 45000],
-            borderColor: 'rgb(59, 130, 246)',
             backgroundColor: gradient,
-            borderWidth: 4,
-            pointBackgroundColor: 'rgb(59, 130, 246)',
+            borderWidth: 2, borderColor: 'rgba(0, 128, 192, 1)',
+            pointBackgroundColor: 'rgba(0, 128, 192, 1)',
             pointBorderColor: '#fff',
             pointBorderWidth: 3,
             pointRadius: 8,
             pointHoverRadius: 12,
-            pointShadowColor: 'rgba(0, 0, 0, 0.3)',
-            pointShadowBlur: 10,
             fill: true,
             tension: 0.4,
-            shadowColor: 'rgba(59, 130, 246, 0.3)',
-            shadowBlur: 15,
-            shadowOffsetX: 0,
-            shadowOffsetY: 10,
           },
         ],
       },
@@ -109,10 +104,11 @@ const ModernLineChart: React.FC = () => {
         },
         scales: {
           y: {
+            position: 'right',
             beginAtZero: true,
             grid: {
               color: 'rgba(255, 255, 255, 0.1)',
-              drawBorder: false,
+              display: false,
             },
             ticks: {
               color: 'rgba(255, 255, 255, 0.7)',
@@ -120,7 +116,7 @@ const ModernLineChart: React.FC = () => {
                 size: 12,
                 weight: 'bold',
               },
-              callback: function(value) {
+              callback: function (value) {
                 return '$' + (value as number).toLocaleString();
               },
             },
@@ -128,7 +124,7 @@ const ModernLineChart: React.FC = () => {
           x: {
             grid: {
               color: 'rgba(255, 255, 255, 0.05)',
-              drawBorder: false,
+              display: false,
             },
             ticks: {
               color: 'rgba(255, 255, 255, 0.7)',
@@ -159,8 +155,8 @@ const ModernLineChart: React.FC = () => {
 
     // Add custom shadow effect
     const originalDraw = chartInstanceRef.current.draw;
-    chartInstanceRef.current.draw = function() {
-      ctx.shadowColor = 'rgba(59, 130, 246, 0.3)';
+    chartInstanceRef.current.draw = function () {
+      ctx.shadowColor = 'rgba(0, 128, 192, 0.3)';
       ctx.shadowBlur = 20;
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 5;
@@ -180,9 +176,9 @@ const ModernLineChart: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative h-80">
-      <canvas ref={canvasRef} className="w-full h-full"></canvas>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none rounded-lg"></div>
+    <div className="relative ">
+      <canvas ref={canvasRef} style={{ height: '260px' }}></canvas>
+      <div className="absolute inset-0"></div>
     </div>
   );
 };

@@ -31,29 +31,29 @@ const ModernDoughnutChart: React.FC = () => {
         labels: ['Desktop', 'Mobile', 'Tablet', 'Other'],
         datasets: [
           {
-            data: [45, 35, 15, 5],
+            data: [45, 35, 15, 5], 
             backgroundColor: [
-              'rgba(59, 130, 246, 0.9)',
-              'rgba(34, 197, 94, 0.9)',
-              'rgba(251, 146, 60, 0.9)',
-              'rgba(168, 85, 247, 0.9)',
+              'rgba(0, 128, 192, 0.9)',     // Deep Teal Blue (Desktop)
+              'rgba(90, 200, 90, 0.9)',     // Olive Green (Mobile)
+              'rgba(100, 116, 139, 0.9)',   // Steel Gray Blue (Tablet)
+              'rgba(38, 70, 83, 0.9)',      // Graphite Blue-Green (Other)
             ],
             borderColor: [
-              'rgb(59, 130, 246)',
-              'rgb(34, 197, 94)',
-              'rgb(251, 146, 60)',
-              'rgb(168, 85, 247)',
+              'rgba(0, 128, 192, 1)',
+              'rgba(90, 200, 90, 1)',
+              'rgba(100, 116, 139, 1)',
+              'rgba(38, 70, 83, 1)',
             ],
-            borderWidth: 4,
+            hoverBackgroundColor: [
+              'rgba(0, 128, 192, 1)',
+              'rgba(90, 200, 90, 1)',
+              'rgba(100, 116, 139, 1)',
+              'rgba(38, 70, 83, 1)',
+            ],
+            borderWidth: 2,
             hoverOffset: 15,
             spacing: 5,
-            hoverBorderWidth: 6,
-            hoverBackgroundColor: [
-              'rgba(59, 130, 246, 1)',
-              'rgba(34, 197, 94, 1)',
-              'rgba(251, 146, 60, 1)',
-              'rgba(168, 85, 247, 1)',
-            ],
+            hoverBorderWidth: 2,
           },
         ],
       },
@@ -63,7 +63,7 @@ const ModernDoughnutChart: React.FC = () => {
         cutout: '65%',
         plugins: {
           legend: {
-            display: true,
+            display: false,
             position: 'bottom',
             labels: {
               color: 'rgba(255, 255, 255, 0.8)',
@@ -73,7 +73,7 @@ const ModernDoughnutChart: React.FC = () => {
                 size: 13,
                 weight: 'bold',
               },
-              generateLabels: function(chart) {
+              generateLabels: function (chart) {
                 const data = chart.data;
                 if (data.labels && data.datasets.length > 0) {
                   return data.labels.map((label, i) => {
@@ -93,7 +93,6 @@ const ModernDoughnutChart: React.FC = () => {
             },
           },
           tooltip: {
-            backgroundColor: 'rgba(0, 0, 0, 0.9)',
             titleColor: '#fff',
             bodyColor: '#fff',
             cornerRadius: 15,
@@ -104,7 +103,7 @@ const ModernDoughnutChart: React.FC = () => {
             bodyFont: {
               size: 13,
             },
-            padding: 12,
+            padding: 1,
             callbacks: {
               label: (context) => `${context.label}: ${context.parsed}%`,
             },
@@ -118,29 +117,11 @@ const ModernDoughnutChart: React.FC = () => {
         },
         elements: {
           arc: {
-            borderWidth: 4,
-            shadowColor: 'rgba(0, 0, 0, 0.3)',
-            shadowBlur: 15,
-            shadowOffsetX: 0,
-            shadowOffsetY: 8,
+            borderWidth: 2,
           },
         },
       },
     });
-
-    // Add custom shadow effect
-    const originalDraw = chartInstanceRef.current.draw;
-    chartInstanceRef.current.draw = function() {
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
-      ctx.shadowBlur = 25;
-      ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = 10;
-      originalDraw.call(this);
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = 0;
-    };
 
     return () => {
       if (chartInstanceRef.current) {
@@ -151,15 +132,9 @@ const ModernDoughnutChart: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative h-80 flex items-center justify-center">
-      <canvas ref={canvasRef} className="w-full h-full"></canvas>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-center bg-white/10 backdrop-blur-sm rounded-full p-6">
-          <p className="text-4xl font-bold text-white mb-1">100%</p>
-          <p className="text-slate-300 text-sm font-medium">Total Users</p>
-        </div>
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none rounded-lg"></div>
+    <div className="relative h-45 flex items-center justify-center mt-8">
+      <canvas ref={canvasRef} style={{ height: '250px', width: '250px' }}></canvas>
+      <div className="absolute inset-0 rounded-lg"></div>
     </div>
   );
 };

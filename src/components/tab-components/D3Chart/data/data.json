@@ -1,0 +1,185 @@
+{
+    "name": "flare",
+    "children": [
+        {
+            "name": "animate",
+            "children": [
+                {
+                    "name": "Easing",
+                    "value": 17010
+                },
+                {
+                    "name": "FunctionSequence",
+                    "value": 5842
+                },
+                {
+                    "name": "interpolate",
+                    "children": [
+                        {
+                            "name": "ArrayInterpolator",
+                            "value": 1983
+                        },
+                        {
+                            "name": "ColorInterpolator",
+                            "value": 2047
+                        },
+                        {
+                            "name": "DateInterpolator",
+                            "value": 1375
+                        },
+                        {
+                            "name": "Interpolator",
+                            "value": 8746
+                        },
+                        {
+                            "name": "MatrixInterpolator",
+                            "value": 2202
+                        }
+                    ]
+                },
+                {
+                    "name": "ISchedulable",
+                    "value": 1041
+                },
+                {
+                    "name": "Parallel",
+                    "value": 5176
+                },
+                {
+                    "name": "Pause",
+                    "value": 449
+                },
+                {
+                    "name": "Scheduler",
+                    "value": 5593
+                }
+            ]
+        },
+        {
+            "name": "data",
+            "children": [
+                {
+                    "name": "converters",
+                    "children": [
+                        {
+                            "name": "Converters",
+                            "value": 721
+                        },
+                        {
+                            "name": "DelimitedTextConverter",
+                            "value": 4294
+                        },
+                        {
+                            "name": "GraphMLConverter",
+                            "value": 9800
+                        },
+                        {
+                            "name": "IDataConverter",
+                            "value": 1314
+                        },
+                        {
+                            "name": "JSONConverter",
+                            "value": 2220
+                        }
+                    ]
+                },
+                {
+                    "name": "DataField",
+                    "value": 1759
+                },
+                {
+                    "name": "DataSchema",
+                    "value": 2165
+                },
+                {
+                    "name": "DataSet",
+                    "value": 586
+                },
+                {
+                    "name": "DataSource",
+                    "value": 3331
+                },
+                {
+                    "name": "DataTable",
+                    "value": 772
+                },
+                {
+                    "name": "DataUtil",
+                    "value": 3322
+                }
+            ]
+        },
+        {
+            "name": "display",
+            "children": [
+                {
+                    "name": "DirtySprite",
+                    "value": 8833
+                },
+                {
+                    "name": "LineSprite",
+                    "value": 1732
+                },
+                {
+                    "name": "RectSprite",
+                    "value": 3623
+                },
+                {
+                    "name": "TextSprite",
+                    "value": 10066
+                }
+            ]
+        },
+        {
+            "name": "b",
+            "children": [
+                {
+                    "name": "DirtySprite",
+                    "value": 8833
+                },
+                {
+                    "name": "LineSprite",
+                    "value": 1732
+                },
+                {
+                    "name": "RectSprite",
+                    "value": 3623
+                },
+                {
+                    "name": "TextSprite",
+                    "value": 10066
+                }
+            ]
+        },
+        {
+            "name": "c",
+            "children": [
+                {
+                    "name": "DirtySprite",
+                    "value": 8833
+                },
+                {
+                    "name": "LineSprite",
+                    "value": 1732
+                },
+                {
+                    "name": "RectSprite",
+                    "value": 3623
+                }
+            ]
+        },
+        {
+            "name": "c",
+            "children": [
+                {
+                    "name": "DirtySprite",
+                    "value": 8833
+                },
+                {
+                    "name": "LineSprite",
+                    "value": 1732
+                }
+            ]
+        }
+    ]
+}

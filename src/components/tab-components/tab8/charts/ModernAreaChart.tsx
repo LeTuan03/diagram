@@ -11,6 +11,7 @@ import {
   Legend,
   Filler,
 } from 'chart.js';
+import { LabelTitleComponent } from '../../../LabelTitle';
 
 ChartJS.register(
   CategoryScale,
@@ -42,19 +43,20 @@ const ModernAreaChart: React.FC = () => {
 
     // Create gradients for area chart
     const gradient1 = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient1.addColorStop(0, 'rgba(59, 130, 246, 0.6)');
-    gradient1.addColorStop(0.5, 'rgba(147, 51, 234, 0.4)');
-    gradient1.addColorStop(1, 'rgba(147, 51, 234, 0.05)');
+    gradient1.addColorStop(0, 'rgba(0, 128, 192, 0.6)');
+    gradient1.addColorStop(0.5, 'rgba(0, 128, 192, 0.3)');
+    gradient1.addColorStop(1, 'rgba(0, 128, 192, 0.05)');
 
     const gradient2 = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient2.addColorStop(0, 'rgba(34, 197, 94, 0.6)');
-    gradient2.addColorStop(0.5, 'rgba(16, 185, 129, 0.4)');
-    gradient2.addColorStop(1, 'rgba(16, 185, 129, 0.05)');
+    gradient2.addColorStop(0, 'rgba(90, 200, 90, 0.6)');
+    gradient2.addColorStop(0.5, 'rgba(90, 200, 90, 0.3)');
+    gradient2.addColorStop(1, 'rgba(90, 200, 90, 0.05)');
 
     const gradient3 = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient3.addColorStop(0, 'rgba(251, 146, 60, 0.6)');
-    gradient3.addColorStop(0.5, 'rgba(245, 101, 101, 0.4)');
-    gradient3.addColorStop(1, 'rgba(245, 101, 101, 0.05)');
+    gradient3.addColorStop(0, 'rgba(100, 116, 139, 0.6)');  // slate-500
+    gradient3.addColorStop(0.5, 'rgba(100, 116, 139, 0.3)');
+    gradient3.addColorStop(1, 'rgba(100, 116, 139, 0.05)');
+
 
     chartInstanceRef.current = new ChartJS(ctx, {
       type: 'line',
@@ -65,9 +67,9 @@ const ModernAreaChart: React.FC = () => {
             label: 'Desktop Users',
             data: [1200, 800, 1600, 2400, 2800, 2200, 1800],
             backgroundColor: gradient1,
-            borderColor: 'rgb(59, 130, 246)',
-            borderWidth: 3,
-            pointBackgroundColor: 'rgb(59, 130, 246)',
+            borderWidth: 2,
+            borderColor: 'rgba(0, 128, 192, 1)',
+            pointBackgroundColor: 'rgba(0, 128, 192, 1)',
             pointBorderColor: '#fff',
             pointBorderWidth: 2,
             pointRadius: 5,
@@ -79,9 +81,9 @@ const ModernAreaChart: React.FC = () => {
             label: 'Mobile Users',
             data: [800, 1200, 2000, 1800, 2400, 2600, 2200],
             backgroundColor: gradient2,
-            borderColor: 'rgb(34, 197, 94)',
-            borderWidth: 3,
-            pointBackgroundColor: 'rgb(34, 197, 94)',
+            borderWidth: 2,
+            borderColor: 'rgba(90, 200, 90, 1)',
+            pointBackgroundColor: 'rgba(90, 200, 90, 1)',
             pointBorderColor: '#fff',
             pointBorderWidth: 2,
             pointRadius: 5,
@@ -93,9 +95,9 @@ const ModernAreaChart: React.FC = () => {
             label: 'Tablet Users',
             data: [400, 600, 800, 1200, 1000, 1400, 1100],
             backgroundColor: gradient3,
-            borderColor: 'rgb(251, 146, 60)',
-            borderWidth: 3,
-            pointBackgroundColor: 'rgb(251, 146, 60)',
+            borderWidth: 2,
+            borderColor: 'rgba(100, 116, 139, 1)',
+            pointBackgroundColor: 'rgba(100, 116, 139, 1)',
             pointBorderColor: '#fff',
             pointBorderWidth: 2,
             pointRadius: 5,
@@ -140,12 +142,13 @@ const ModernAreaChart: React.FC = () => {
             },
             ticks: {
               color: 'rgba(255, 255, 255, 0.7)',
-              callback: function(value) {
+              callback: function (value) {
                 return (value as number).toLocaleString();
               },
             },
           },
           x: {
+            display: false,
             grid: {
               color: 'rgba(255, 255, 255, 0.1)',
             },
@@ -174,8 +177,8 @@ const ModernAreaChart: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative h-80">
-      <canvas ref={canvasRef} className="w-full h-full"></canvas>
+    <div className="relative">
+      <canvas ref={canvasRef} className="w-full h-full" style={{ height: '260px' }}></canvas>
     </div>
   );
 };

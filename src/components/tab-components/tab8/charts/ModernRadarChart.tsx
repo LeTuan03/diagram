@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { LabelTitleComponent } from '../../../LabelTitle';
 
 ChartJS.register(
   RadialLinearScale,
@@ -38,12 +39,13 @@ const ModernRadarChart: React.FC = () => {
 
     // Create gradient for radar chart
     const gradient1 = ctx.createRadialGradient(150, 150, 0, 150, 150, 150);
-    gradient1.addColorStop(0, 'rgba(59, 130, 246, 0.8)');
-    gradient1.addColorStop(1, 'rgba(59, 130, 246, 0.1)');
+    gradient1.addColorStop(0, 'rgba(0, 128, 192, 0.7)');
+    gradient1.addColorStop(1, 'rgba(0, 128, 192, 0.1)');
 
     const gradient2 = ctx.createRadialGradient(150, 150, 0, 150, 150, 150);
-    gradient2.addColorStop(0, 'rgba(34, 197, 94, 0.8)');
-    gradient2.addColorStop(1, 'rgba(34, 197, 94, 0.1)');
+    gradient2.addColorStop(0, 'rgba(90, 200, 90, 0.7)');
+    gradient2.addColorStop(1, 'rgba(90, 200, 90, 0.1)');
+
 
     chartInstanceRef.current = new ChartJS(ctx, {
       type: 'radar',
@@ -52,28 +54,28 @@ const ModernRadarChart: React.FC = () => {
         datasets: [
           {
             label: 'Current Performance',
-            data: [85, 92, 78, 88, 95, 82],
+            data: [100, 92, 78, 88, 95, 82],
             backgroundColor: gradient1,
-            borderColor: 'rgb(59, 130, 246)',
-            pointBackgroundColor: 'rgb(59, 130, 246)',
+            borderColor: 'rgba(0, 128, 192, 1)',
+            pointBackgroundColor: 'rgba(0, 128, 192, 1)',
             pointBorderColor: '#fff',
             pointBorderWidth: 2,
             pointRadius: 6,
             pointHoverRadius: 8,
-            borderWidth: 3,
+            borderWidth: 2,
             fill: true,
           },
           {
             label: 'Target Performance',
-            data: [90, 85, 88, 92, 88, 90],
+            data: [10, 95, 58, 52, 38, 70],
             backgroundColor: gradient2,
-            borderColor: 'rgb(34, 197, 94)',
-            pointBackgroundColor: 'rgb(34, 197, 94)',
+            borderColor: 'rgba(90, 200, 90, 1)',
+            pointBackgroundColor: 'rgba(90, 200, 90, 1)',
             pointBorderColor: '#fff',
             pointBorderWidth: 2,
             pointRadius: 6,
             pointHoverRadius: 8,
-            borderWidth: 3,
+            borderWidth: 2,
             fill: true,
           },
         ],
@@ -144,8 +146,8 @@ const ModernRadarChart: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative h-80">
-      <canvas ref={canvasRef} className="w-full h-full"></canvas>
+    <div className="relative ">
+      <canvas ref={canvasRef} style={{ height: '260px' }}></canvas>
     </div>
   );
 };

@@ -1,0 +1,74 @@
+[
+    {
+        "id": "flare.analytics.cluster.AgglomerativeCluster",
+        "value": 3938
+    },
+    {
+        "id": "flare.analytics.cluster.CommunityStructure",
+        "value": 3812
+    },
+    {
+        "id": "flare.analytics.cluster.HierarchicalCluster",
+        "value": 6714
+    },
+    {
+        "id": "flare.animate.Sequence",
+        "value": 5534
+    },
+    {
+        "id": "flare.animate.Transition",
+        "value": 9201
+    },
+    {
+        "id": "flare.physics.GravityForce",
+        "value": 1336
+    },
+    {
+        "id": "flare.util.Shapes",
+        "value": 19118
+    },
+    {
+        "id": "flare.util.Sort",
+        "value": 6887
+    },
+    {
+        "id": "flare.util.Stats",
+        "value": 6557
+    },
+    {
+        "id": "flare.util.Strings",
+        "value": 22026
+    },
+    {
+        "id": "flare.vis.axis.Axes",
+        "value": 1302
+    },
+    {
+        "id": "flare.vis.axis.Axis",
+        "value": 24593
+    },
+    {
+        "id": "flare.vis.axis.AxisLabel",
+        "value": 636
+    },
+    {
+        "id": "flare.vis.axis.CartesianAxes",
+        "value": 6703
+    },
+    {
+        "id": "flare.vis.controls.AnchorControl",
+        "value": 2138
+    },
+    {
+        "id": "flare.vis.operator.layout.TreeMapLayout",
+        "value": 9191
+    },
+    {
+        "id": "flare.vis.operator.Operator",
+        "value": 2490
+    },
+    {
+        "id": "flare.vis.Visualization",
+        "value": 16540
+    }
+]
