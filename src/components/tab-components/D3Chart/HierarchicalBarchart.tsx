@@ -87,7 +87,7 @@ const HierarchicalBarChart = ({
         const x = d3.scaleLinear().range([marginLeft, width - marginRight]);
         const modernColors = [
             '#10b981', // Emerald
-            '#06b6d4', // Cyan
+            '#00BFFF', // Cyan
             '#f59e0b', // Amber
             '#ef4444', // Red
             '#ec4899', // Pink (có hơi hồng, không tím)
@@ -194,8 +194,8 @@ const HierarchicalBarChart = ({
                     tooltip
                         .html(`
                 <div>
-                    <p class="text-black">${d.data.name}</p>
-                    ${typeof d.value === "number" ? `<p class="text-black">Giá trị: <span>${d.value}</span></p>` : ""}
+                    <p class="text-black font-bold">${d.data.name}</p>
+                    ${typeof d.value === "number" ? `<p class="text-black">Giá trị: <b>${d.value}</b></p>` : ""}
                     ${d.children ? `<p class="text-xs text-blue-400">Nhấp để xem chi tiết</p>` : ""}
                 </div>
                 `)

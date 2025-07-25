@@ -11,21 +11,11 @@ import { LabelTitleComponent } from "../../LabelTitle";
 import HierarchicalBarChart from "../D3Chart/HierarchicalBarchart";
 import BarChartTransitions from "../D3Chart/BarChartTransitions";
 import ZoomableCirclePacking from "../D3Chart/ZoomableCirclePacking";
+import LineChartMultiple from "../D3Chart/LineChartMultiple";
 
 const Tab3: React.FC = () => {
     const [showMarkers, setShowMarkers] = useState(true);
     const [showFlows, setShowFlows] = useState(true);
-
-    const lineData = [
-        { name: 'Tháng 1', value: 400 },
-        { name: 'Tháng 2', value: 300 },
-        { name: 'Tháng 3', value: 600 },
-        { name: 'Tháng 4', value: 800 },
-        { name: 'Tháng 5', value: 500 },
-        { name: 'Tháng 6', value: 700 },
-    ];
-    // Các hàm không đổi, chuyển ra ngoài component hoặc dùng useCallback
-
 
     return (
         <div className="w-full  min-h-screen chart-video-container">
@@ -38,18 +28,18 @@ const Tab3: React.FC = () => {
 
                 <div className="col-span-3 space-y-6 p-3 z-10">
                     <div className="">
-                        <LabelTitleComponent title="Radar Chart" />
+                        <LabelTitleComponent title="Hierarchical Bar Chart" />
                         {/* <Bubble /> */}
                         <HierarchicalBarChart />
                     </div>
                     <div className="">
-                        <LabelTitleComponent title="Radar Chart" />
+                        <LabelTitleComponent title="Bar Chart Transitions" />
                         {/* <HierarchicalBarChart data={dataFake} /> */}
                         <BarChartTransitions />
                     </div>
 
                     <div className="">
-                        <LabelTitleComponent title="Radar Chart" />
+                        <LabelTitleComponent title="Circle Chart" />
                         <CircleChart />
                     </div>
 
@@ -177,14 +167,15 @@ const Tab3: React.FC = () => {
                         </div>
                     </div>
                     <div>
-                        <LabelTitleComponent title="Radar Chart" />
+                        <LabelTitleComponent title="Zoomable Circle Packing" />
                         <ZoomableCirclePacking />
                     </div>
                     <div className="items-center">
                         <div className="flex items-center mb-6">
-                            <LabelTitleComponent title="Radar Chart" />
+                            <LabelTitleComponent title="Line Chart" />
                         </div>
-                        <div className="flex items-center">
+                        <LineChartMultiple  />
+                        {/* <div className="flex items-center">
                             <ResponsiveContainer width="100%" height={200}>
                                 <LineChart data={lineData}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
@@ -193,7 +184,7 @@ const Tab3: React.FC = () => {
                                     <Line type="monotone" dataKey="value" stroke="#00D4FF" strokeWidth={2} />
                                 </LineChart>
                             </ResponsiveContainer>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

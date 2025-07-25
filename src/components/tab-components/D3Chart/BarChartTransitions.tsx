@@ -74,10 +74,28 @@ const BarChartTransitions = () => {
 
         // Create axis generators
         const xAxis = d3.axisBottom(x).tickSizeOuter(0);
+        // --- Tooltip ---
+        let tooltip: d3.Selection<HTMLDivElement, unknown, HTMLElement, any> = d3.select("body").select(".hierarchical-bar-tooltip");
+        if (tooltip.empty()) {
+            tooltip = d3.select("body")
+                .append("div")
+                .attr("class", "hierarchical-bar-tooltip")
+                .style("position", "fixed")
+                .style("z-index", "9999")
+                .style("pointer-events", "none")
+                .style("background", "rgba(255, 255, 255, 0.97)")
+                .style("color", "#fff")
+                .style("padding", "0px 12px 5px")
+                .style("border-radius", "5px")
+                .style("font-size", "14px")
+                .style("opacity", 0)
+                .style("transition", "opacity 0.2s");
+        }
+
 
         // Create bars
         svg.append('g')
-            .attr('fill', 'steelblue')
+            .attr('fill', '#00CED1')
             .selectAll<SVGRectElement, any>('rect')
             .data(data)
             .join('rect')
@@ -85,6 +103,31 @@ const BarChartTransitions = () => {
             .attr('x', d => x(d.letter)!)
             .attr('y', d => y(d.frequency))
             .attr('height', d => y(0) - y(d.frequency))
+            .on('mouseover', function (event, d) {
+                d3.select(this).attr('fill', '#20B2AA');
+                tooltip
+                    .html(`
+                <div>
+                    <p class="text-black font-bold">${d.letter}</p>
+                    <p class="text-black">Giá trị: <b>${d.frequency}</b></p>
+                </div>
+                `)
+                    .style("left", (event.clientX + 15) + "px")
+                    .style("top", (event.clientY - 15) + "px")
+                    .style("opacity", 1);
+            })
+            .on('mousemove', function (event) {
+                tooltip
+                    .style("left", (event.clientX + 15) + "px")
+                    .style("top", (event.clientY - 15) + "px");
+            })
+            .on('mouseout', function () {
+                d3.select(this).attr('fill', '#00CED1');
+            })
+            .on('mouseleave', function () {
+                d3.select(this).style('opacity', 0.9).style('filter', 'drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.1))');
+                tooltip.style("opacity", 0);
+            })
             .attr('width', x.bandwidth());
 
         // Create axes
@@ -92,7 +135,7 @@ const BarChartTransitions = () => {
             .attr('class', 'x-axis')
             .attr('transform', `translate(0,${height - marginBottom})`)
             .call(xAxis)
-            .attr('color', 'white')
+            .attr('color', '#E0FFFF')
             .attr('font-size', '16px');
 
         svg.append('g')
@@ -100,7 +143,7 @@ const BarChartTransitions = () => {
             .attr('transform', `translate(${marginLeft},0)`)
             .call(d3.axisLeft(y).tickFormat((y: any) => (y * 100).toFixed()))
             .call(g => g.select('.domain').remove())
-            .attr('color', 'white')
+            .attr('color', '#E0FFFF')
             .attr('font-size', '16px');
 
         // Create chart object with update function

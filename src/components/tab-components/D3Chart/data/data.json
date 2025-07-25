@@ -131,7 +131,7 @@
             ]
         },
         {
-            "name": "b",
+            "name": "stock",
             "children": [
                 {
                     "name": "DirtySprite",
@@ -152,7 +152,7 @@
             ]
         },
         {
-            "name": "c",
+            "name": "type",
             "children": [
                 {
                     "name": "DirtySprite",
@@ -169,7 +169,7 @@
             ]
         },
         {
-            "name": "c",
+            "name": "other",
             "children": [
                 {
                     "name": "DirtySprite",

@@ -353,7 +353,7 @@ const ChartOverlay: React.FC<ChartOverlayProps> = ({
             style={{
             position: "absolute",
             left: x,
-            top: y,
+            top: y + 50,
             background: "linear-gradient(135deg, #232526 0%, #414345 100%)",
             border: "1.5px solid #3b4252",
             padding: 18,

@@ -537,10 +537,10 @@ const Tab7: React.FC = () => {
         <div className="w-full h-screen overflow-hidden relative chart-video-container">
             {/* Control Panel */}
             <video autoPlay muted loop playsInline className="chart-video-bg">
-                <source src="../../../../public/media/video/backgroundMap2.mp4" type="video/mp4" />
+                <source src="media/video/backgroundMap5.mp4" type="video/mp4" />
                 Trình duyệt của bạn không hỗ trợ video.
             </video>
-            <div className="grid grid-cols-12 gap-6 h-full overflow-y-auto pb-12 px-4 ">
+            <div className="grid grid-cols-12 gap-6 h-full pb-12 px-4 ">
                 <div className="col-span-3 p-6 z-10">
                     <LabelTitleComponent title="Bar Chart" />
                     <ModernBarChart />

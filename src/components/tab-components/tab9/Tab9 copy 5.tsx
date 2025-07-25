@@ -9,21 +9,6 @@ import ChartOverlay from './ChartOverlay';
 const MapConfig = {
   zoomScale: 1.2,
 }
-
-const bubbleDataLocation = [
-  { name: "Vị trí 1", value: 25, coordinates: [106.5, 10.5] },
-  { name: "Vị trí 2", value: 18, coordinates: [105.8, 10.8] },
-  { name: "Vị trí 3", value: 42, coordinates: [107.2, 11.1] },
-  { name: "Vị trí 4", value: 33, coordinates: [106.0, 9.8] },
-  { name: "Vị trí 5", value: 67, coordinates: [105.5, 10.2] }
-];
-
-const flows = [
-  { from: "Thành phố Hồ Chí Minh", to: "Tỉnh Đồng Nai", value: 50 },
-  { from: "Tỉnh An Giang", to: "Tỉnh Cà Mau", value: 30 },
-  { from: "Tỉnh Đồng Tháp", to: "Tỉnh Vĩnh Long", value: 40 },
-];
-
 const MapComponent: React.FC = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [geojson, setGeojson] = useState<any>(null);
@@ -44,6 +29,20 @@ const MapComponent: React.FC = () => {
   const xaJson: any = geojsonData;
   let selectedProvince: SVGPathElement | null = null;
 
+  const bubbleDataLocation = [
+    { name: "Vị trí 1", value: 25, coordinates: [106.5, 10.5] },
+    { name: "Vị trí 2", value: 18, coordinates: [105.8, 10.8] },
+    { name: "Vị trí 3", value: 42, coordinates: [107.2, 11.1] },
+    { name: "Vị trí 4", value: 33, coordinates: [106.0, 9.8] },
+    { name: "Vị trí 5", value: 67, coordinates: [105.5, 10.2] }
+  ];
+
+  const flows = [
+    { from: "Thành phố Hồ Chí Minh", to: "Tỉnh Đồng Nai", value: 50 },
+    { from: "Tỉnh An Giang", to: "Tỉnh Cà Mau", value: 30 },
+    { from: "Tỉnh Đồng Tháp", to: "Tỉnh Vĩnh Long", value: 40 },
+  ];
+
   useLayoutEffect(() => {
     // Khởi tạo map khi load xong JSON
     if (!geojson) {
@@ -59,6 +58,26 @@ const MapComponent: React.FC = () => {
       .attr("height", height);
 
     svg.selectAll("g").remove(); // clear cũ
+
+    // Định nghĩa arrowhead marker
+    const defs = svg.append("defs");
+
+    const arrowMarker = defs.append("marker")
+      .attr("id", "arrowhead")
+      .attr("viewBox", "0 0 36 36")
+      .attr("refX", 18)
+      .attr("refY", 18)
+      .attr("markerWidth", 18)
+      .attr("markerHeight", 18)
+      .attr("orient", "auto")
+      .attr("markerUnits", "userSpaceOnUse")
+      .style("fill", "#3b82f6"); // màu xanh đẹp
+
+    arrowMarker.append("path")
+      .attr("d", "M0,0 L36,18 L0,36 L9,18 Z") // mũi tên cong và lớn hơn, mượt hơn
+      .attr("stroke", "none")
+      .attr("fill", "#3b82f6");
+
 
     const g = svg.append("g");
 
@@ -334,25 +353,6 @@ const MapComponent: React.FC = () => {
         provinceCentroids.set(name, coords);
       }
     });
-
-    // Định nghĩa arrowhead marker
-    const defs = svg.append("defs");
-
-    const arrowMarker = defs.append("marker")
-      .attr("id", "arrowhead")
-      .attr("viewBox", "0 0 36 36")
-      .attr("refX", 18)
-      .attr("refY", 18)
-      .attr("markerWidth", 18)
-      .attr("markerHeight", 18)
-      .attr("orient", "auto")
-      .attr("markerUnits", "userSpaceOnUse")
-      .style("fill", "#3b82f6"); // màu xanh đẹp
-
-    arrowMarker.append("path")
-      .attr("d", "M0,0 L36,18 L0,36 L9,18 Z") // mũi tên cong và lớn hơn, mượt hơn
-      .attr("stroke", "none")
-      .attr("fill", "#3b82f6");
 
     //flow với mũi tên
     zoomContainer.selectAll(".flow-line")

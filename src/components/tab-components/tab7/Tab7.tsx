@@ -604,7 +604,7 @@ const Tab7: React.FC = () => {
                     Trình duyệt của bạn không hỗ trợ video.
                 </video>
 
-                <div className="col-span-3 space-y-6 p-3 z-10">
+                <div className="col-span-3 p-3 z-10">
                     <div className="">
                         <LabelTitleComponent title="Radar Chart" />
                         <BarChart />
@@ -782,7 +782,7 @@ const Tab7: React.FC = () => {
                     </div>
                     <div className="space-y-4">
                         <LabelTitleComponent title="Radar Chart" />
-                        <ResponsiveContainer width="100%" height={250}>
+                        <ResponsiveContainer width="100%" height={200}>
                             <RadarChart cx="50%" cy="50%" outerRadius="80%" data={regionData}>
                                 <PolarGrid />
                                 <PolarAngleAxis dataKey="subject" />
@@ -796,7 +796,7 @@ const Tab7: React.FC = () => {
                             <LabelTitleComponent title="Radar Chart" />
                         </div>
                         <div className="flex items-center">
-                            <ResponsiveContainer width="100%" height={250}>
+                            <ResponsiveContainer width="100%" height={200}>
                                 <LineChart data={lineData}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                                     <XAxis dataKey="name" tick={{ fill: '#9CA3AF', fontSize: 12 }} />

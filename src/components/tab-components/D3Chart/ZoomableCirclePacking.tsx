@@ -13,7 +13,7 @@ const ZoomableCirclePacking: React.FC<any> = ({ data = dataFake }) => {
 
         const color = d3.scaleLinear<string>()
             .domain([0, 5])
-            .range(["hsla(0, 0%, 100%, 1.00)", "hsla(199, 75%, 40%, 1.00)"])
+            .range(["#E0FFFF", "#00BFFF"]) // Light Cyan -> Deep Sky Blue
             .interpolate(d3.interpolateHcl);
 
         const pack = (data: any) => d3.pack()
@@ -39,10 +39,12 @@ const ZoomableCirclePacking: React.FC<any> = ({ data = dataFake }) => {
         const node = g.selectAll("circle")
             .data(root.descendants().slice(1))
             .join("circle")
-            .attr("fill", d => d.children ? color(d.depth) : "white")
+            .attr("fill", d => d.children ? color(d.depth) : "#94A3B8") // non-parent: soft gray
+            .attr("stroke", "#0F172A")
+            .attr("stroke-width", 1)
             .attr("pointer-events", d => !d.children ? "none" : null)
-            .on("mouseover", function () { d3.select(this).attr("stroke", "#000"); })
-            .on("mouseout", function () { d3.select(this).attr("stroke", null); })
+            .on("mouseover", function () { d3.select(this).attr("stroke", "#FBBF24"); }) // hover: amber
+            .on("mouseout", function () { d3.select(this).attr("stroke", "#0F172A"); })
             .on("click", (event, d) => {
                 if (focus !== d) {
                     zoom(event, d);
@@ -51,13 +53,14 @@ const ZoomableCirclePacking: React.FC<any> = ({ data = dataFake }) => {
             });
 
         const label = g.append("g")
-            .style("font", "10px sans-serif")
+            .style("font", "10px 'Poppins', sans-serif")
             .attr("pointer-events", "none")
             .attr("text-anchor", "middle")
             .selectAll("text")
             .data(root.descendants())
             .join("text")
             .style("fill-opacity", d => d.parent === root ? 1 : 0)
+            .style("fill", "#F1F5F9") // text: soft white
             .style("display", d => d.parent === root ? "inline" : "none")
             .text((d: any) => `${d.data.name}${d.data.value != null ? ` (${d.data.value})` : ''}`);
 
